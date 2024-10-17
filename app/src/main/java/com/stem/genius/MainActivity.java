@@ -3,18 +3,17 @@ package com.stem.genius;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Dialog;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
@@ -39,13 +38,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+
 public class MainActivity extends AppCompatActivity {
 
 
     AdView mAdView;
     GridViewbyJuba mainGrid;
     SharedPreferences sharedPreferences;
-    TextView tvScore;
+    TextView tvScore,masterScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         mainGrid = findViewById(R.id.mainGrid);
         tvScore = findViewById(R.id.tvScore);
+        masterScore = findViewById(R.id.masterScore);
         mAdView.setVisibility(View.GONE);
         sharedPreferences = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
 
@@ -79,8 +80,14 @@ public class MainActivity extends AppCompatActivity {
 
         String lastScore = sharedPreferences.getString("savedScore", "No Data");
         tvScore.setText(lastScore);
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
+        int totalMasterScore = sharedPreferences.getInt("masterScore", 0);
+        masterScore.setText("" + totalMasterScore);
 
     }
+
+
+
 
 
 
@@ -275,31 +282,32 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private static final int TIME_INTERVAL = 2000; // # milliseconds, desired
-    private long mBackPressed;
 
-    // When user click bakpress button this method is called
+    private boolean doubleBackToExitPressedOnce = false;
+    private Toast backToast;
+
     @Override
     public void onBackPressed() {
-        // When user press back button
-
-        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-
-        } else {
-
-            Toast.makeText(getBaseContext(), "Press again to exit",
-                    Toast.LENGTH_SHORT).show();
+        if (doubleBackToExitPressedOnce) {
+            if (backToast != null) {
+                backToast.cancel();
+            }
+            super.onBackPressed();
+            return;
         }
 
-        mBackPressed = System.currentTimeMillis();
+        this.doubleBackToExitPressedOnce = true;
+        backToast = Toast.makeText(this, "Please press BACK again to EXIT", Toast.LENGTH_SHORT);
+        backToast.show();
 
-
-
-    } // end of onBackpressed method
+        // Reset the flag after 2 seconds
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
+    }
 
 
     /* private void tributeToAdor(){

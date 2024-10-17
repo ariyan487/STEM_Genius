@@ -2,26 +2,22 @@
     <string name="app_name">STEM-Genius</string>
     <string name="play">Play Now</string>
     <string name="confirm">সাবমিট করুন</string>
-    <string name="scores">টোটাল স্কোর</string>
-
-
+    <string name="scores">TOTAL SCORE</string>
 
     <!-- Device ID  setTestDeviceIds (search on logcat for device id) -->
     <string name="device_id">ABCD</string>
     <!-- Admob AD ON or OFF -->
     <string name="show_admob_ad">ON</string>
 
-
-    <!-- Tst Test test -->
+    <!-- Test AdMob IDs -->
     <string name="admob_APP_ID">ca-app-pub-3940256099942544~3347511713</string>
     <string name="admob_INTERSTITIAL_UNIT_ID">ca-app-pub-3940256099942544/1033173712</string>
     <string name="admob_BANNER_UNIT_ID">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_REWARDED_UNIT_ID">ca-app-pub-3940256099942544/5224354917</string>
 
     <!-- Real AD
-    <string name="admob_APP_ID">ca-app-pub-3940256099942544~3347511713</string>
-    <string name="admob_INTERSTITIAL_UNIT_ID">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="admob_BANNER_UNIT_ID">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_APP_ID">ca-app-pub-xxxxxxxxxxxx~xxxxxxxxxx</string>
+    <string name="admob_INTERSTITIAL_UNIT_ID">ca-app-pub-xxxxxxxxxxxx/yyyyyyyyyy</string>
+    <string name="admob_BANNER_UNIT_ID">ca-app-pub-xxxxxxxxxxxx/zzzzzzzzzz</string>
     -->
-
-
 </resources>

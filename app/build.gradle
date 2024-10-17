@@ -6,7 +6,7 @@ android {
 
 
     defaultConfig {
-        applicationId "com.example.genius"
+        applicationId "com.stem.genius"
         minSdk 24
         targetSdk 34
         versionCode 1
@@ -39,6 +39,8 @@ dependencies {
     implementation "com.airbnb.android:lottie:3.4.1"
 
     //admob
-    implementation 'com.google.android.gms:play-services-ads:21.4.0'
+    implementation 'com.google.android.gms:play-services-ads:22.3.0'
+
+
 
 }

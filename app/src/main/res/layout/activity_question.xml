@@ -76,10 +76,9 @@
             </LinearLayout>
 
 
+
         </soup.neumorphism.NeumorphCardView>
     </LinearLayout>
-
-
 
 
 
@@ -112,6 +111,7 @@
                 >
 
 
+
                 <RadioGroup
                     android:id="@+id/radioGroup"
                     android:layout_width="match_parent"
@@ -119,12 +119,22 @@
                     android:paddingLeft="30dp"
                     android:paddingRight="30dp"
                     >
+                    <TextView
+                        android:id="@+id/tvQuestionCounter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1/15"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/quiz_icon_background"
+                        android:layout_gravity="center"/>
 
 
                     <RadioButton
+
                         android:id="@+id/opcaoA"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_height="58dp"
                         android:buttonTint="#7D5801"
                         android:text="Option A"
                         android:textColor="#7D5801"
@@ -133,7 +143,7 @@
                     <RadioButton
                         android:id="@+id/opcaoB"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_height="58dp"
                         android:buttonTint="#7D5801"
                         android:text="Option B"
                         android:textColor="#7D5801"
@@ -142,7 +152,7 @@
                     <RadioButton
                         android:id="@+id/opcaoC"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_height="58dp"
                         android:buttonTint="#7D5801"
                         android:text="Option C"
                         android:textColor="#7D5801"
@@ -152,7 +162,7 @@
                     <RadioButton
                         android:id="@+id/opcaoD"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_height="58dp"
                         android:buttonTint="#7D5801"
                         android:text="Option D"
                         android:textColor="#7D5801"
