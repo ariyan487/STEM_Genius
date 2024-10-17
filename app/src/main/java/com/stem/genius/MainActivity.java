@@ -7,9 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import android.os.Handler;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,10 +42,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-
+import android.app.AlertDialog;
 public class MainActivity extends AppCompatActivity {
 
-
+    LinearLayout l1;
     AdView mAdView;
     GridViewbyJuba mainGrid;
     SharedPreferences sharedPreferences;
@@ -57,9 +61,7 @@ public class MainActivity extends AppCompatActivity {
         masterScore = findViewById(R.id.masterScore);
         mAdView.setVisibility(View.GONE);
         sharedPreferences = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
-
-        //আদর (Student ID: 47621) এর রুহ এর মাগফেরাত কামনা করি এবং আল্লাহ যেনো তাঁর পরিবারের জন্য সহায় হোন।
-        //tributeToAdor();
+        l1 = findViewById(R.id.l1);
 
 
         //calling a method to create our question bank with ans
@@ -84,7 +86,54 @@ public class MainActivity extends AppCompatActivity {
         int totalMasterScore = sharedPreferences.getInt("masterScore", 0);
         masterScore.setText("" + totalMasterScore);
 
+        l1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int totalMasterScore = sharedPreferences.getInt("masterScore", 0);
+                int count15 = sharedPreferences.getInt("count_15", 0);
+                int count10 = sharedPreferences.getInt("count_10", 0);
+                int count7 = sharedPreferences.getInt("count_7", 0);
+
+                LayoutInflater inflater = getLayoutInflater();
+                View alertLayout = inflater.inflate(R.layout.alert_box_cardview, null);
+                TextView tvMasterScore = alertLayout.findViewById(R.id.tvMasterScore);
+                tvMasterScore.setText("Your master score is: " + totalMasterScore);
+
+                TextView tvRules = alertLayout.findViewById(R.id.tvRules);
+                String underlinedText = "Rules of STEM point:\n";
+                String remainingText = "Score 15 = 5 STEM points -->> (" + count15 + " times)\n"
+                        + "Score 10 = 2 STEM points -->> (" + count10 + " times)\n"
+                        + "Score 7 = 1 STEM point   -->> (" + count7 + " times)\n"
+                        + "Score < 5 = -2 STEM points\n"
+                        + "Score 5-6 = -1 STEM point";
+
+                SpannableString spannableString = new SpannableString(underlinedText + remainingText);
+                spannableString.setSpan(new UnderlineSpan(), 0, underlinedText.length(), 0);
+                tvRules.setText(spannableString);
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setView(alertLayout);
+
+                AlertDialog dialog = builder.create();
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+                Button btnDismiss = alertLayout.findViewById(R.id.btnDismiss);
+                btnDismiss.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
+            }
+        });
+
+
     }
+
+
 
 
 
@@ -310,34 +359,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /* private void tributeToAdor(){
-
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                final Dialog dialog = new Dialog(MainActivity.this);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setCancelable(true);
-                dialog.setContentView(R.layout.dialog_tribute);
-                dialog.show();
-                TextView tvThanks = dialog.findViewById(R.id.tvThanks);
-                tvThanks.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                    }
-                });
-
-            }
-        }, 4000);
-
-
-
-
-
-    } */
 
 
 }

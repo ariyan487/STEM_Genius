@@ -22,6 +22,7 @@
 
 
     <LinearLayout
+        android:id="@+id/l1"
         android:layout_below="@id/imgBack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,8 +60,8 @@
             android:layout_height="wrap_content"
             android:text="Subject Name"
             android:textColor="@color/colorBase"
-            android:textSize="15sp"
-            android:textStyle="normal"
+            android:textSize="18sp"
+            android:textStyle="bold"
             />
 
     <TextView
@@ -91,12 +92,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:layout_gravity="center"
             android:text=""
             android:textSize="20sp"
             android:textColor="@android:color/holo_red_dark"
             android:textStyle="bold" />
 
     </LinearLayout>
+
+
+    <TextView
+        android:layout_margin="10dp"
+        android:layout_below="@id/l1"
+        android:id="@+id/as"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Rules Of STEM Point"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/holo_red_dark"
+        android:textStyle="bold" />
 
 
 

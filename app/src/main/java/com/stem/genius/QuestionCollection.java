@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -267,41 +269,28 @@ public class QuestionCollection extends AppCompatActivity {
     }
 
     private void showAdAlert() {
-        final TextView timerTextView = new TextView(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.alert_box_ad, null);
+
+        final TextView timerTextView = alertLayout.findViewById(R.id.timerTextView);
+        Button btnWatchAd = alertLayout.findViewById(R.id.btnWatchAd);
+        Button btnSkip = alertLayout.findViewById(R.id.btnSkip);
+
         timerTextView.setText("Time remaining: 6 seconds");
-        timerTextView.setPadding(20, 20, 20, 20);
-        timerTextView.setTextSize(18);
-        timerTextView.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
-        timerTextView.setGravity(Gravity.CENTER);
 
         alertDialog = new AlertDialog.Builder(this)
-                .setTitle("Wrong Answer")
-                .setMessage("Watch an ad to get another chance and some extra time")
-                .setPositiveButton("Watch Ad", null) // Set to null to handle button click
-                .setNegativeButton("Skip", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        isAdShowing = false;
-                        startActivity(new Intent(QuestionCollection.this, WrongActivity.class));
-
-                        // Load a new question instead of the old one
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                loadQuestion(); // Load new question
-                            }
-                        }, 2000); // Delay of 2 seconds
-                    }
-                })
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setView(alertLayout)
                 .setCancelable(false)
                 .create();
 
-        alertDialog.setView(timerTextView); // Set the timer text view
+        // Set the alert dialog background to transparent
+        if (alertDialog.getWindow() != null) {
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        }
+
         alertDialog.show();
 
-        // Handle the click event of the "Watch Ad" button
-        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+        btnWatchAd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isNetworkConnected()) {
@@ -315,7 +304,21 @@ public class QuestionCollection extends AppCompatActivity {
             }
         });
 
-        // 6-second countdown timer
+        btnSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isAdShowing = false;
+                startActivity(new Intent(QuestionCollection.this, WrongActivity.class));
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadQuestion(); // Load new question
+                    }
+                }, 2000); // Delay of 2 seconds
+                alertDialog.dismiss();
+            }
+        });
+
         adTimer = new CountDownTimer(6000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -326,20 +329,17 @@ public class QuestionCollection extends AppCompatActivity {
             public void onFinish() {
                 alertDialog.dismiss(); // Close dialog
                 if (!isAdShowing) { // If the ad wasn't shown
-                    // Load a question
                     Intent intent = new Intent(QuestionCollection.this, WrongActivity.class);
                     startActivity(intent);
                 }
             }
         }.start();
 
-        // Cancel the previous timer if any
         if (countDownTimer != null) {
             countDownTimer.cancel();
             isTimerRunning = false;
         }
 
-        // Handle the dismiss event of the dialog
         alertDialog.setOnDismissListener(dialog -> {
             adTimer.cancel(); // Cancel the timer
             if (!isAdShowing) {
@@ -347,6 +347,7 @@ public class QuestionCollection extends AppCompatActivity {
             }
         });
     }
+
 
 
     // প্রশ্নের টাইমার ২০ সেকেন্ডে বাড়ানোর ফাংশন
@@ -952,12 +953,7 @@ public class QuestionCollection extends AppCompatActivity {
         };
         QuestionModule.createQuestionsForSubject("Islam", R.drawable.islam, questions);
 
-      /*  questions = new ArrayList<QuestionModule>() {
-           {
 
-          }
-        };
-        QuestionModule.createQuestionsForSubject("", R.drawable.islam, questions); */
 
         questions = new ArrayList<QuestionModule>() {
             {
@@ -1001,7 +997,66 @@ public class QuestionCollection extends AppCompatActivity {
 
             }
         };
-        QuestionModule.createQuestionsForSubject("Python", R.drawable.islam, questions);
+        QuestionModule.createQuestionsForSubject("Python", R.drawable.python, questions);
+
+
+        questions = new ArrayList<QuestionModule>() {
+            {
+                add(new QuestionModule("What is the synonym of 'happy'?", "C", "Sad", "Angry", "Joyful", "Bored"));
+                add(new QuestionModule("Which word is an antonym of 'difficult'?", "B", "Hard", "Easy", "Complicated", "Challenging"));
+                add(new QuestionModule("What is the past tense of 'go'?", "A", "Went", "Gone", "Going", "Go"));
+                add(new QuestionModule("Which of the following is a conjunction?", "D", "Quickly", "Beautiful", "Run", "And"));
+                add(new QuestionModule("What is the plural form of 'child'?", "B", "Childs", "Children", "Childes", "Childern"));
+                add(new QuestionModule("What is the synonym of 'big'?", "C", "Small", "Tiny", "Large", "Little"));
+                add(new QuestionModule("Which of the following is a noun?", "B", "Quickly", "Happiness", "Beautiful", "Run"));
+                add(new QuestionModule("What is the opposite of 'hot'?", "B", "Warm", "Cold", "Cool", "Spicy"));
+                add(new QuestionModule("Which word is a verb?", "D", "Quick", "Quickly", "Quicker", "Run"));
+                add(new QuestionModule("What is the correct plural of 'mouse'?", "B", "Mouses", "Mice", "Mouses", "Micey"));
+                add(new QuestionModule("Which of the following is an adverb?", "C", "Joy", "Joyful", "Quickly", "Quick"));
+                add(new QuestionModule("What is the past tense of 'eat'?", "B", "Eaten", "Ate", "Eats", "Eating"));
+                add(new QuestionModule("What is the superlative form of 'good'?", "C", "Goodest", "Better", "Best", "Most good"));
+                add(new QuestionModule("What is the main purpose of a conjunction?", "C", "To describe", "To modify", "To connect clauses", "To replace nouns"));
+                add(new QuestionModule("Which of the following sentences is correct?", "B", "She go to school.", "She goes to school.", "She going to school.", "She gone to school."));
+                add(new QuestionModule("What is the correct way to say the time: 3:30?", "B", "Three and half", "Half past three", "Three thirty", "Three and thirty"));
+                add(new QuestionModule("Which of the following is a determiner?", "C", "Quickly", "Run", "The", "Happiness"));
+                add(new QuestionModule("What is the opposite of 'empty'?", "A", "Full", "Vacant", "Available", "Unused"));
+                add(new QuestionModule("What is the meaning of 'diligent'?", "B", "Lazy", "Hardworking", "Careless", "Slow"));
+                add(new QuestionModule("Which word means 'a place where books are kept'?", "A", "Library", "Store", "Classroom", "Office"));
+                add(new QuestionModule("What is the past tense of 'write'?", "A", "Wrote", "Written", "Writed", "Writing"));
+                add(new QuestionModule("What is the opposite of 'rich'?", "B", "Wealthy", "Poor", "Affluent", "Lavish"));
+                add(new QuestionModule("Which of the following is a proper noun?", "B", "city", "London", "country", "river"));
+                add(new QuestionModule("What is the meaning of 'exhilarating'?", "B", "Boring", "Exciting", "Sad", "Tiring"));
+                add(new QuestionModule("Which word is a preposition?", "C", "And", "But", "Under", "So"));
+                add(new QuestionModule("What is the synonym of 'difficult'?", "B", "Easy", "Hard", "Simple", "Straightforward"));
+                add(new QuestionModule("What is the correct form of the sentence: 'He play soccer.'?", "B", "He playing soccer.", "He plays soccer.", "He played soccer.", "He playes soccer."));
+                add(new QuestionModule("Which of the following is a collective noun?", "A", "Herd", "Dog", "Cat", "House"));
+                add(new QuestionModule("What is the opposite of 'bright'?", "A", "Dark", "Light", "Shiny", "Dim"));
+                add(new QuestionModule("What is the past tense of 'swim'?", "A", "Swam", "Swimmed", "Swim", "Swimming"));
+                add(new QuestionModule("Which word is an interjection?", "A", "Wow", "Quickly", "Beautiful", "Happy"));
+                add(new QuestionModule("What is the plural of 'leaf'?", "B", "Leafs", "Leaves", "Leafes", "Leefs"));
+                add(new QuestionModule("What is the meaning of 'optimistic'?", "A", "Hopeful", "Pessimistic", "Realistic", "Negative"));
+                add(new QuestionModule("Which of the following is an abstract noun?", "B", "Table", "Happiness", "Dog", "House"));
+                add(new QuestionModule("What is the correct past tense of 'sing'?", "A", "Sang", "Singed", "Singing", "Sangy"));
+                add(new QuestionModule("Which of the following is a homonym?", "A", "Bark", "Dog", "Tree", "Run"));
+                add(new QuestionModule("What is the opposite of 'easy'?", "A", "Hard", "Simple", "Straightforward", "Clear"));
+                add(new QuestionModule("Which word is a modal verb?", "A", "Can", "Run", "Quickly", "Jump"));
+                add(new QuestionModule("What is the superlative form of 'bad'?", "C", "Worse", "Badest", "Worst", "Most bad"));
+                add(new QuestionModule("Which sentence is grammatically correct?", "B", "They was happy.", "They are happy.", "They is happy.", "They be happy."));
+                add(new QuestionModule("What is the past participle of 'go'?", "B", "Went", "Gone", "Goes", "Going"));
+                add(new QuestionModule("Which of the following is a synonym for 'fast'?", "A", "Quick", "Slow", "Steady", "Cautious"));
+                add(new QuestionModule("What is the meaning of 'benevolent'?", "A", "Kind", "Mean", "Selfish", "Rude"));
+                add(new QuestionModule("What is the correct form of the verb: 'He (to go) to school every day.'?", "A", "Goes", "Go", "Going", "Gone"));
+            }
+        };
+        QuestionModule.createQuestionsForSubject("English", R.drawable.english, questions);
+
+
+        /*  questions = new ArrayList<QuestionModule>() {
+           {
+
+          }
+        };
+        QuestionModule.createQuestionsForSubject("", R.drawable.islam, questions); */
 
             }
         }

@@ -2,7 +2,7 @@
     <string name="app_name">STEM-Genius</string>
     <string name="play">Play Now</string>
     <string name="confirm">সাবমিট করুন</string>
-    <string name="scores">TOTAL SCORE</string>
+    <string name="scores">SCORE</string>
 
     <!-- Device ID  setTestDeviceIds (search on logcat for device id) -->
     <string name="device_id">ABCD</string>
