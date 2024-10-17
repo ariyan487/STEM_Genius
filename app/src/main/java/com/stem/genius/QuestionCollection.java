@@ -1,5 +1,5 @@
 package com.stem.genius;
-
+import java.util.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -64,9 +64,8 @@ public class QuestionCollection extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
         initializeViews();
-
-        manageQuestions();
-        // Select and shuffle questions
+        int roundNumber = 1; // প্রথম রাউন্ড হিসেবে মান দিন
+        manageQuestions(roundNumber); // রাউন্ডের জন্য সংখ্যা পাস করুন
         loadQuestion(); // Load the first question
 
         // বিজ্ঞাপন লোড করা অ্যাপ চালু হওয়ার সাথে সাথে
@@ -99,35 +98,49 @@ public class QuestionCollection extends AppCompatActivity {
         tvQuestionCounter = findViewById(R.id.tvQuestionCounter);
     }
 
-    // Method to shuffle and select 15 questions
-    private final List<QuestionModule> usedQuestions = new ArrayList<>();
+    private final List<QuestionModule> usedQuestions = new ArrayList<>(); // পূর্ববর্তী রাউন্ডের প্রশ্ন
+    private final List<List<QuestionModule>> roundsQuestions = new ArrayList<>(); // রাউন্ডের প্রশ্ন
 
-    private void manageQuestions() {
-        // নতুন প্রশ্ন প্রয়োজন হলে ব্যবহারকৃত প্রশ্নগুলো বাদ দিয়ে নতুন প্রশ্ন পূরণ করুন
-        if (question_list.size() < 15) {
-            refillQuestions(); // এটি ব্যবহার করা হবে যদি প্রশ্নের সংখ্যা ১৫ এর কম হয়
+    private void manageQuestions(int roundNumber) {
+        // রাউন্ড নম্বরের ভিত্তিতে ব্যবহৃত প্রশ্নগুলো বাদ দিন
+        if (roundNumber > 1) {
+            // Remove previously used questions from the selection for this round
+            for (int i = 0; i < roundNumber - 1; i++) {
+                if (i < roundsQuestions.size()) {
+                    usedQuestions.addAll(roundsQuestions.get(i)); // Add questions from previous rounds to usedQuestions
+                }
+            }
         }
+
+        // Check if we need to refill questions
+        if (question_list.size() < 15) {
+            refillQuestions(); // Fill questions from usedQuestions if we have less than 15 questions
+        }
+
+        // Remove previously used questions from the selection
+        question_list.removeAll(usedQuestions); // Exclude used questions from the current selection
 
         // Shuffle and select 15 questions
         Collections.shuffle(question_list);
         List<QuestionModule> selectedQuestions = question_list.subList(0, Math.min(15, question_list.size()));
 
-        // Set new question list and move selected to usedQuestions
-        question_list = new ArrayList<>(selectedQuestions);
+        // Save the selected questions to the roundsQuestions list
+        roundsQuestions.add(new ArrayList<>(selectedQuestions));
 
-        // সব ব্যবহার করা প্রশ্নকে usedQuestions এ পাঠিয়ে দিন
-        usedQuestions.addAll(selectedQuestions);
+        // Set new question list and move selected to usedQuestions
+        usedQuestions.addAll(selectedQuestions); // Add to usedQuestions
     }
 
     private void refillQuestions() {
-        // Check if there are enough unused questions first
+        // Move used questions back to question_list if we have enough remaining questions
         if (usedQuestions.size() + question_list.size() >= 15) {
-            // Move used questions back to question_list if necessary
             question_list.addAll(usedQuestions);
-            Collections.shuffle(question_list); // Shuffle when re-adding used questions
-            usedQuestions.clear(); // Clear used questions
+            Collections.shuffle(question_list);
+            usedQuestions.clear(); // Clear used questions after adding back to question_list
         }
     }
+
+
 
 
 
@@ -993,11 +1006,7 @@ public class QuestionCollection extends AppCompatActivity {
                 add(new QuestionModule("পাইথনে ডিকশনারির কী-এর মান বের করতে কোন মেথডটি ব্যবহৃত হয়?", "B", "get()", "keys()", "values()", "items()"));
                 add(new QuestionModule("পাইথনে একটি ফাংশনে ডিফল্ট মান সেট করতে কোনটি ব্যবহৃত হয়?", "D", "optional", "set", "def", "parameter"));
                 add(new QuestionModule("পাইথনে একটি লিস্ট থেকে ডুপ্লিকেট সরাতে কোনটি ব্যবহৃত হয়?", "B", "tuple()", "set()", "list()", "dict()"));
-                add(new QuestionModule("পাইথনে কোন ডেটা স্ট্রাকচারটি কী এবং মানের জোড়া সংরক্ষণ করে?", "D", "list", "tuple", "set", "dictionary"));
-                add(new QuestionModule("পাইথনে কোনটি স্ট্রিং মেথড নয়?", "C", "strip()", "find()", "extend()", "replace()"));
-                add(new QuestionModule("পাইথনে লিস্টকে সর্ট করতে কোন মেথডটি ব্যবহৃত হয়?", "A", "sort()", "sorted()", "order()", "arrange()"));
-                add(new QuestionModule("পাইথনে '==' এবং '!=' অপারেটরগুলি কী পরীক্ষা করে?", "C", "আইডেন্টিটি", "টাইপ", "সমতা ও অসমতা", "অপারেশন"));
-                add(new QuestionModule("পাইথনে কোনটি ফাংশনের আউটপুট নয়?", "B", "print()", "function()", "len()", "input()"));
+
 
             }
         };
