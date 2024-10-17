@@ -98,20 +98,10 @@ public class QuestionCollection extends AppCompatActivity {
         tvQuestionCounter = findViewById(R.id.tvQuestionCounter);
     }
 
-    private final List<QuestionModule> usedQuestions = new ArrayList<>(); // পূর্ববর্তী রাউন্ডের প্রশ্ন
-    private final List<List<QuestionModule>> roundsQuestions = new ArrayList<>(); // রাউন্ডের প্রশ্ন
+    private final List<QuestionModule> usedQuestions = new ArrayList<>();
+    private final List<List<QuestionModule>> roundsQuestions = new ArrayList<>(); // Rounds questions
 
     private void manageQuestions(int roundNumber) {
-        // রাউন্ড নম্বরের ভিত্তিতে ব্যবহৃত প্রশ্নগুলো বাদ দিন
-        if (roundNumber > 1) {
-            // Remove previously used questions from the selection for this round
-            for (int i = 0; i < roundNumber - 1; i++) {
-                if (i < roundsQuestions.size()) {
-                    usedQuestions.addAll(roundsQuestions.get(i)); // Add questions from previous rounds to usedQuestions
-                }
-            }
-        }
-
         // Check if we need to refill questions
         if (question_list.size() < 15) {
             refillQuestions(); // Fill questions from usedQuestions if we have less than 15 questions
@@ -128,6 +118,7 @@ public class QuestionCollection extends AppCompatActivity {
         roundsQuestions.add(new ArrayList<>(selectedQuestions));
 
         // Set new question list and move selected to usedQuestions
+        question_list = new ArrayList<>(selectedQuestions);
         usedQuestions.addAll(selectedQuestions); // Add to usedQuestions
     }
 
