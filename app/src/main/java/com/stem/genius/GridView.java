@@ -3,24 +3,23 @@ package com.stem.genius;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
-import android.widget.GridView;
 
-public class GridViewbyJuba extends GridView {
+public class GridView extends android.widget.GridView {
 
     boolean expanded = false;
 
-    public GridViewbyJuba(Context context)
+    public GridView(Context context)
     {
         super(context);
     }
 
-    public GridViewbyJuba(Context context, AttributeSet attrs)
+    public GridView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
     }
 
-    public GridViewbyJuba(Context context, AttributeSet attrs,
-                          int defStyle)
+    public GridView(Context context, AttributeSet attrs,
+                    int defStyle)
     {
         super(context, attrs, defStyle);
     }

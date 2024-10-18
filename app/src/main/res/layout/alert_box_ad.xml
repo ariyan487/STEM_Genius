@@ -7,6 +7,7 @@
     <!-- Add other UI elements here -->
 
     <androidx.cardview.widget.CardView
+
         android:id="@+id/card_master_score"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,23 +17,35 @@
         app:cardBackgroundColor="#FFFFFF">
 
         <LinearLayout
+            android:background="#228B22"
             android:padding="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_gravity="center"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="0dp"
+                android:scaleType="centerCrop"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/warning"
+                android:layout_weight="1"
+                />
             <TextView
                 android:layout_gravity="center"
                 android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Wrong Answer"
-                android:textColor="@android:color/holo_red_dark"
+                android:textColor="#FF1000"
                 android:textSize="20sp"
                 android:layout_marginBottom="10dp"
                 android:textStyle="bold"/>
 
             <TextView
+                android:textStyle="bold"
                 android:layout_gravity="center"
                 android:id="@+id/tvMessage"
                 android:layout_width="wrap_content"
@@ -48,9 +61,10 @@
                 android:layout_height="wrap_content"
                 android:text="Time remaining: 6 seconds"
                 android:layout_marginBottom="20dp"
-                android:textColor="@android:color/holo_red_dark"
+                android:textColor="#FF1200"
                 android:textSize="18sp"
                 android:layout_gravity="center"
+                android:textStyle="bold"
                 android:gravity="center"/>
 
             <LinearLayout
@@ -60,10 +74,12 @@
                 android:gravity="center">
 
                 <Button
+                    android:textStyle="bold"
                     android:id="@+id/btnSkip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Skip"
+                    android:background="@drawable/btn_orange"
                     android:padding="10dp"/>
 
                 <Button
@@ -71,7 +87,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Watch Ad"
+                    android:textStyle="bold"
                     android:padding="10dp"
+                    android:background="@drawable/btn_orange"
                     android:layout_marginStart="20dp"/>
 
             </LinearLayout>

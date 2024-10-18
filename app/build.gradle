@@ -36,7 +36,7 @@ dependencies {
     //neumorphism lib
     implementation 'com.github.fornewid:neumorphism:0.3.2'
     //Lottie Animation
-    implementation "com.airbnb.android:lottie:3.4.1"
+    implementation 'com.airbnb.android:lottie:6.5.2'
 
     //admob
     implementation 'com.google.android.gms:play-services-ads:22.3.0'

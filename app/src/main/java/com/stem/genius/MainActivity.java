@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     LinearLayout l1;
     AdView mAdView;
-    GridViewbyJuba mainGrid;
+    GridView mainGrid;
     SharedPreferences sharedPreferences;
     TextView tvScore,masterScore;
 
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 LayoutInflater inflater = getLayoutInflater();
                 View alertLayout = inflater.inflate(R.layout.alert_box_cardview, null);
                 TextView tvMasterScore = alertLayout.findViewById(R.id.tvMasterScore);
-                tvMasterScore.setText("Your master score is: " + totalMasterScore);
+                tvMasterScore.setText("STEM Point: " + totalMasterScore);
 
                 TextView tvRules = alertLayout.findViewById(R.id.tvRules);
                 String underlinedText = "Rules of STEM point:\n";
