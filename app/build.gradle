@@ -4,15 +4,18 @@ android {
     namespace 'com.stem.genius'
     compileSdk 34
 
-
     defaultConfig {
         applicationId "com.stem.genius"
         minSdk 24
         targetSdk 34
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17 // Java 17 ব্যবহার করুন
+        targetCompatibility JavaVersion.VERSION_17 // Java 17 ব্যবহার করুন
     }
 
     buildTypes {
@@ -21,26 +24,24 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1' // Use the latest stable version
+    implementation 'com.google.android.material:material:1.9.0' // Use the latest stable version
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4' // Use the latest stable version
+    testImplementation 'junit:junit:4.13.2' // Latest JUnit version
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5' // Latest version
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1' // Latest version
+    androidTestImplementation 'androidx.test.espresso:espresso-idling-resource:3.5.1' // Latest version
 
-    //neumorphism lib
+    // Neumorphism library
     implementation 'com.github.fornewid:neumorphism:0.3.2'
-    //Lottie Animation
+
+    // Lottie Animation
     implementation "com.airbnb.android:lottie:3.4.1"
 
-    //admob
+    // AdMob
     implementation 'com.google.android.gms:play-services-ads:21.4.0'
-
-
-
 }

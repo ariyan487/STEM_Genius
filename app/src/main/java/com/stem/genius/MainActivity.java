@@ -23,6 +23,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,12 +46,11 @@ import java.util.List;
 
 import android.app.AlertDialog;
 public class MainActivity extends AppCompatActivity {
-
     LinearLayout l1;
     AdView mAdView;
     GridView mainGrid;
     SharedPreferences sharedPreferences;
-    TextView tvScore,masterScore;
+    TextView tvScore,masterScore,clickMeTextView;
     LottieAnimationView lott;
 
     @Override
@@ -65,6 +65,11 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
         l1 = findViewById(R.id.l1);
         lott = findViewById(R.id.lott);
+        clickMeTextView = findViewById(R.id.clickMeTextView);
+
+        clickMeTextView.setOnClickListener(view -> {
+
+        });
 
 
         //calling a method to create our question bank with ans
@@ -119,8 +124,8 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
-            Button btnDismiss = alertLayout.findViewById(R.id.btnDismiss);
-            btnDismiss.setOnClickListener(new View.OnClickListener() {
+            ImageView close = alertLayout.findViewById(R.id.close);
+            close.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     dialog.dismiss();
@@ -130,7 +135,12 @@ public class MainActivity extends AppCompatActivity {
             dialog.show();
         });
 
+        Animation bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        clickMeTextView.startAnimation(bounce);
+
+
         lott.setOnClickListener(view -> {
+            // Inflate the custom dialog layout
             LayoutInflater inflater = LayoutInflater.from(this);
             View dialogView = inflater.inflate(R.layout.custom_dialog_layout, null);
 
@@ -143,22 +153,20 @@ public class MainActivity extends AppCompatActivity {
                 alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             }
 
-            Button btnDismiss = dialogView.findViewById(R.id.btnDismiss);
-            btnDismiss.setOnClickListener(v -> alertDialog.dismiss());
+            // Find the dismiss button and set its click listener
+            ImageView close = dialogView.findViewById(R.id.close);
+            close.setOnClickListener(v -> {
+                // Dismiss the dialog
+                alertDialog.dismiss();
+
+            });
+
 
             alertDialog.show();
         });
 
 
-
     }
-
-
-
-
-
-
-
 
 
 

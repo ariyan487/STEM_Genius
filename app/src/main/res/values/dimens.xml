@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_question">18sp</dimen>
+    <dimen name="text_size_option">18sp</dimen>
+    <dimen name="text_size_timer">18sp</dimen>
+    <dimen name="text_size_question_counter">20sp</dimen>
+    <dimen name="text_size_button">18sp</dimen>
+</resources>
+

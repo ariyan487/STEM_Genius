@@ -107,8 +107,8 @@ public class ScoreActivity extends AppCompatActivity {
                 AlertDialog dialog = builder.create();
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
-                Button btnDismiss = alertLayout.findViewById(R.id.btnDismiss);
-                btnDismiss.setOnClickListener(new View.OnClickListener() {
+                ImageView close = alertLayout.findViewById(R.id.close);
+                close.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
@@ -119,6 +119,14 @@ public class ScoreActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent home = new Intent(ScoreActivity.this, MainActivity.class);
+        home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(home);
+        finish(); // Finish the current activity to prevent going back to this screen
     }
 
     private String setStatus(int score) {

@@ -3,295 +3,197 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:layout_gravity="center"
     android:id="@+id/rootLay"
-    android:background="#228B22"
-    >
+    android:background="@color/fgreeen">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_alignParentTop="true"
+            android:id="@+id/lot"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:padding="0dp"
+            android:scaleType="centerCrop"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/cloud1"
+            />
 
         <LinearLayout
+            android:layout_above="@id/l1"
+            android:id="@+id/layQuestionPart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:weightSum="6"
+            android:layout_height="120dp"
             android:orientation="vertical">
-            <com.airbnb.lottie.LottieAnimationView
+
+            <soup.neumorphism.NeumorphCardView
+                style="@style/Widget.Neumorph.ImageView"
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:padding="0dp"
-                android:scaleType="centerCrop"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/cloud1"
-                android:layout_weight="1"
-                />
-            <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:padding="0dp"
-                android:scaleType="centerCrop"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                android:layout_weight="1"
-                app:lottie_rawRes="@raw/cloud1"
-                />
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/lottieBottom"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:padding="0dp"
-                android:scaleType="centerCrop"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/cloud1"
-                android:layout_weight="1"
-                />
-            <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:padding="0dp"
-                android:scaleType="centerCrop"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/cloud1"
-                android:layout_weight="1"
-                />
-            <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:padding="0dp"
-                android:scaleType="centerCrop"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/cloud1"
-                android:layout_weight="1"
-                />
-            <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:padding="0dp"
-                android:scaleType="centerCrop"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/cloud1"
-                android:layout_weight="1"
-                />
+                android:layout_height="120dp"
+                android:layout_margin="0dp"
+                app:neumorph_shadowColorDark="@color/colorOrangeBaseDark"
+                app:neumorph_shadowColorLight="@color/colorOrangeBaseDark">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#F0F0F0"
+                    android:gravity="start|center"
+                    android:orientation="horizontal"
+                    android:padding="20dp">
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/lottsss"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:padding="0dp"
+                        android:scaleType="centerInside"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/q1" />
+
+                    <TextView
+                        android:id="@+id/lblPergunta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="start|center"
+                        android:paddingLeft="5dp"
+                        android:text="দিল্লির হিংহাসনে অধিষ্ঠিত প্রথম মুসলিম নারী কে?"
+                        android:textColor="@color/colorOrangeBaseDark"
+                        android:textSize="@dimen/text_size_question"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </soup.neumorphism.NeumorphCardView>
         </LinearLayout>
 
 
         <LinearLayout
-            android:layout_marginTop="110dp"
+
+            android:id="@+id/l1"
+            android:layout_centerVertical="true"
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
+
+            <!-- Question Part -->
 
 
-
-
-
-    <!-- Question Part  -->
-    <LinearLayout
-        android:id="@+id/layQuestionPart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-
-        <soup.neumorphism.NeumorphCardView
-            style="@style/Widget.Neumorph.ImageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
-            app:neumorph_shadowColorDark="@color/colorOrangeBaseDark"
-            app:neumorph_shadowColorLight="@color/colorOrangeBaseDark"
-            tools:layout_editor_absoluteX="0dp">
-
+            <!-- Question Part -->
             <LinearLayout
-                android:background="#F0F0F0"
+                android:id="@+id/layRadioPart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="20dp"
-                android:gravity="start|center"
-                >
+                android:orientation="vertical">
 
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/lottsss"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:padding="0dp"
-                    android:scaleType="centerInside"
-                    app:lottie_autoPlay="true"
-                    app:lottie_loop="true"
-                    app:lottie_rawRes="@raw/q1"
-                    />
-
-                <TextView
-                    android:id="@+id/lblPergunta"
+                <soup.neumorphism.NeumorphCardView
+                    style="@style/Widget.Neumorph.ImageView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="দিল্লির হিংহাসনে অধিষ্ঠিত প্রথম মুসলিম নারী কে?"
-                    android:textColor="@color/colorOrangeBaseDark"
-                    android:textSize="18sp"
-                    android:gravity="start|center"
-                    android:textStyle="bold"
-                    android:paddingLeft="5dp"
-                    />
-            </LinearLayout>
+                    android:layout_margin="0dp"
+                    app:neumorph_shadowColorDark="@color/colorOrangeBaseDark"
+                    app:neumorph_shadowColorLight="@color/colorOrangeBaseDark">
 
-
-
-        </soup.neumorphism.NeumorphCardView>
-    </LinearLayout>
-
-
-
-    <!-- Question Part  -->
-    <LinearLayout
-
-        android:id="@+id/layRadioPart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/layQuestionPart"
-        >
-
-        <soup.neumorphism.NeumorphCardView
-            style="@style/Widget.Neumorph.ImageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
-            app:neumorph_shadowColorDark="@color/colorOrangeBaseDark"
-            app:neumorph_shadowColorLight="@color/colorOrangeBaseDark"
-            tools:layout_editor_absoluteX="0dp">
-
-            <LinearLayout
-                android:background="#F0F0F0"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp"
-                >
-
-
-                <RadioGroup
-                    android:id="@+id/radioGroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="30dp"
-                    android:paddingRight="30dp">
-
-                    <TextView
-                        android:id="@+id/tvQuestionCounter"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="1/15"
-                        android:textColor="@color/colorOrangeBaseDark"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:background="#F0F0F0"
+                        android:orientation="vertical"
+                        android:padding="20dp">
 
+                        <RadioGroup
+                            android:id="@+id/radioGroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="30dp"
+                            android:paddingRight="30dp">
 
-                    <RadioButton
-                        android:textStyle="bold"
-                        android:id="@+id/opcaoA"
-                        android:layout_width="match_parent"
-                        android:layout_height="58dp"
-                        android:buttonTint="#7D5801"
-                        android:text="Option A"
-                        android:textColor="@color/colorOrangeBaseDark"
-                        android:textSize="18sp" />
+                            <TextView
+                                android:id="@+id/tvQuestionCounter"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="1/15"
+                                android:textColor="@color/colorOrangeBaseDark"
+                                android:textSize="@dimen/text_size_question_counter"
+                                android:textStyle="bold" />
 
-                    <RadioButton
-                        android:id="@+id/opcaoB"
-                        android:layout_width="match_parent"
-                        android:layout_height="58dp"
-                        android:buttonTint="#7D5801"
-                        android:text="Option B"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorOrangeBaseDark"
-                        android:textSize="18sp" />
+                            <RadioButton
+                                android:id="@+id/opcaoA"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:buttonTint="#7D5801"
+                                android:text="Option A"
+                                android:textColor="@color/colorOrangeBaseDark"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
 
-                    <RadioButton
-                        android:id="@+id/opcaoC"
-                        android:layout_width="match_parent"
-                        android:layout_height="58dp"
-                        android:buttonTint="#7D5801"
-                        android:text="Option C"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorOrangeBaseDark"
+                            <RadioButton
+                                android:id="@+id/opcaoB"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:buttonTint="#7D5801"
+                                android:text="Option B"
+                                android:textColor="@color/colorOrangeBaseDark"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
 
-                        android:textSize="18sp" />
+                            <RadioButton
+                                android:id="@+id/opcaoC"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:buttonTint="#7D5801"
+                                android:text="Option C"
+                                android:textColor="@color/colorOrangeBaseDark"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
 
-                    <RadioButton
-                        android:id="@+id/opcaoD"
-                        android:layout_width="match_parent"
-                        android:layout_height="58dp"
-                        android:buttonTint="#7D5801"
-                        android:textStyle="bold"
-                        android:text="Option D"
-                        android:textColor="@color/colorOrangeBaseDark"
-                        android:textSize="18sp" />
-                </RadioGroup>
+                            <RadioButton
+                                android:id="@+id/opcaoD"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:buttonTint="#7D5801"
+                                android:text="Option D"
+                                android:textColor="@color/colorOrangeBaseDark"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+                        </RadioGroup>
 
-                <TextView
-                    android:layout_gravity="center"
-                    android:id="@+id/timerText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Time left: 30s"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/holo_red_dark"/>
+                        <TextView
+                            android:padding="5dp"
+                            android:id="@+id/timerText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Time left: 30s"
+                            android:textColor="@android:color/holo_red_dark"
+                            android:textSize="@dimen/text_size_timer"
+                            android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/confirm"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_orange"
-                    android:text="@string/confirm"
-                    android:textColor="#FFFFFF"
-                    android:textAllCaps="false"
-                    android:onClick="loadAnswer"
-                    android:textSize="18sp"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:layout_marginTop="10dp"
-                    android:clickable="true"
-                    android:foreground="?attr/selectableItemBackground"
-                    />
-
-
-
-
+                        <Button
+                            android:id="@+id/confirm"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:background="@drawable/btn_orange"
+                            android:clickable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:onClick="loadAnswer"
+                            android:text="@string/confirm"
+                            android:textAllCaps="false"
+                            android:textColor="#FFFFFF"
+                            android:textSize="@dimen/text_size_button" />
+                    </LinearLayout>
+                </soup.neumorphism.NeumorphCardView>
             </LinearLayout>
-
-
-        </soup.neumorphism.NeumorphCardView>
-    </LinearLayout>
-
-
-
-
-
-
-</LinearLayout>
+        </LinearLayout>
     </RelativeLayout>
-
-
-
 
 
 </LinearLayout>
