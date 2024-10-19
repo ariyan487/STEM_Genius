@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-10-18T16:43:43.757964400Z">
+        <DropdownSelection timestamp="2024-10-19T12:15:55.446442700Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="PhysicalDevice" identifier="serial=KNYX6DAQZDIJAQGE" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\ariya\.android\avd\Ariyan.avd" />
             </handle>
           </Target>
         </DropdownSelection>

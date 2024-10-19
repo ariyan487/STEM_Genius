@@ -26,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     GridView mainGrid;
     SharedPreferences sharedPreferences;
     TextView tvScore,masterScore;
+    LottieAnimationView lott;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         mAdView.setVisibility(View.GONE);
         sharedPreferences = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
         l1 = findViewById(R.id.l1);
+        lott = findViewById(R.id.lott);
 
 
         //calling a method to create our question bank with ans
@@ -86,49 +89,66 @@ public class MainActivity extends AppCompatActivity {
         int totalMasterScore = sharedPreferences.getInt("masterScore", 0);
         masterScore.setText("" + totalMasterScore);
 
-        l1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int totalMasterScore = sharedPreferences.getInt("masterScore", 0);
-                int count15 = sharedPreferences.getInt("count_15", 0);
-                int count10 = sharedPreferences.getInt("count_10", 0);
-                int count7 = sharedPreferences.getInt("count_7", 0);
+        l1.setOnClickListener(v -> {
+            int totalMasterScore1 = sharedPreferences.getInt("masterScore", 0);
+            int count15 = sharedPreferences.getInt("count_15", 0);
+            int count10 = sharedPreferences.getInt("count_10", 0);
+            int count7 = sharedPreferences.getInt("count_7", 0);
 
-                LayoutInflater inflater = getLayoutInflater();
-                View alertLayout = inflater.inflate(R.layout.alert_box_cardview, null);
-                TextView tvMasterScore = alertLayout.findViewById(R.id.tvMasterScore);
-                tvMasterScore.setText("STEM Point: " + totalMasterScore);
+            LayoutInflater inflater = getLayoutInflater();
+            View alertLayout = inflater.inflate(R.layout.alert_box_cardview, null);
+            TextView tvMasterScore = alertLayout.findViewById(R.id.tvMasterScore);
+            tvMasterScore.setText("STEM Point: " + totalMasterScore1);
 
-                TextView tvRules = alertLayout.findViewById(R.id.tvRules);
-                String underlinedText = "Rules of STEM point:\n";
-                String remainingText = "Score 15 = 5 STEM points -->> (" + count15 + " times)\n"
-                        + "Score 10 = 2 STEM points -->> (" + count10 + " times)\n"
-                        + "Score 7 = 1 STEM point   -->> (" + count7 + " times)\n"
-                        + "Score < 5 = -2 STEM points\n"
-                        + "Score 5-6 = -1 STEM point";
+            TextView tvRules = alertLayout.findViewById(R.id.tvRules);
+            String underlinedText = "Rules of STEM point:\n";
+            String remainingText = "Score 15 = 5 STEM points -->> (" + count15 + " times)\n"
+                    + "Score 10 = 2 STEM points -->> (" + count10 + " times)\n"
+                    + "Score 7 = 1 STEM point   -->> (" + count7 + " times)\n"
+                    + "Score < 5 = -2 STEM points\n"
+                    + "Score 5-6 = -1 STEM point";
 
-                SpannableString spannableString = new SpannableString(underlinedText + remainingText);
-                spannableString.setSpan(new UnderlineSpan(), 0, underlinedText.length(), 0);
-                tvRules.setText(spannableString);
+            SpannableString spannableString = new SpannableString(underlinedText + remainingText);
+            spannableString.setSpan(new UnderlineSpan(), 0, underlinedText.length(), 0);
+            tvRules.setText(spannableString);
 
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setView(alertLayout);
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setView(alertLayout);
 
-                AlertDialog dialog = builder.create();
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            AlertDialog dialog = builder.create();
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
-                Button btnDismiss = alertLayout.findViewById(R.id.btnDismiss);
-                btnDismiss.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
+            Button btnDismiss = alertLayout.findViewById(R.id.btnDismiss);
+            btnDismiss.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
 
-                dialog.show();
-            }
+            dialog.show();
         });
+
+        lott.setOnClickListener(view -> {
+            LayoutInflater inflater = LayoutInflater.from(this);
+            View dialogView = inflater.inflate(R.layout.custom_dialog_layout, null);
+
+            AlertDialog alertDialog = new AlertDialog.Builder(this)
+                    .setView(dialogView)
+                    .create();
+
+            // Set the dialog background to be transparent
+            if (alertDialog.getWindow() != null) {
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            }
+
+            Button btnDismiss = dialogView.findViewById(R.id.btnDismiss);
+            btnDismiss.setOnClickListener(v -> alertDialog.dismiss());
+
+            alertDialog.show();
+        });
+
 
 
     }

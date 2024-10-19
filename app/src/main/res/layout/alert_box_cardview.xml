@@ -1,58 +1,82 @@
-<!-- activity_main.xml -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
-    <!-- Add other UI elements here -->
-
-
-
+    <!-- CardView with Lottie Animation and Developer Info -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_master_score"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="10dp"
-        app:cardBackgroundColor="#FFFFFF">
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="6dp">
 
-    <LinearLayout
-        android:background="#228B22"
-        android:padding="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        <!-- FrameLayout to Overlay TextView on Lottie Animation -->
+        <FrameLayout
+            android:background="#228B22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:id="@+id/tvMasterScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="STEM :"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="20sp"/>
-        <TextView
-            android:id="@+id/tvRules"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:textStyle="bold"
-            android:text="Rules"
-            android:textColor="#000000"
-            android:textSize="16sp"/>
+            <!-- Lottie Animation View -->
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottiAnimationView"
+                android:layout_gravity="right"
+                android:layout_width="160dp"
+                android:layout_height="200dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/win" />
 
-        <Button
-            android:textStyle="bold"
-            android:id="@+id/btnDismiss"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dismiss"
-            android:background="@drawable/btn_orange"
-            android:layout_gravity="right"
-            android:padding="8dp"/>
+            <LinearLayout
+                android:padding="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/tvMasterScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="STEM :"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvRules"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rules"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:padding="16dp"/>
+            </LinearLayout>
+
+            <!-- New LinearLayout to hold Button -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:orientation="vertical"
+                android:paddingBottom="5dp"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/btnDismiss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dismiss"
+                    android:textStyle="bold"
+                    android:background="@drawable/btn_orange"
+                    android:padding="0dp"/>
+            </LinearLayout>
+
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
